@@ -1,0 +1,44 @@
+- nacoes_sistema:
+    * A tabela é responsável por armazenar dados das nações no sistema;
+    * Acesso completo somente para administradores;
+    * Acesso de usuários comuns somente para visualização;
+    * Vai possuir tela de pesquisa avançada com CRUD para administradores do sistema;
+    * Vai possuir tela de visualização e seleção da nação para usuários comuns do sistema.
+    
+- clubes_sistema:
+    * A tabela é responsável por armazenar os dados dos clubes no sistema;
+    * Acesso completo somente para administradores;
+    * Acesso de usuários comuns somente para visualização;
+    * Vai possuir tela de pesquisa avançada com CRUD para administradores do sistema;
+    * Vai possuir tela de visualização e seleção da nação para usuários comuns do sistema.
+    
+- jogadores_sistema:
+    * A tabela é responsável por armazenar os dados dos jogadores no sistema;
+    * Acesso completo somente para administradores;
+    * Acesso de usuários comuns somente para visualização;
+    * Vai possuir tela de pesquisa avançada com CRUD para administradores do sistema;
+    * Vai possuir tela de visualização e seleção da nação para usuários comuns do sistema.
+    
+- ligas:
+    * A tabela é responsável por armazenar os registros de ligas;
+    * Acesso completo somente para administradores;
+    * Acesso de usuários comuns somente para visualização;
+    * Vai possuir tela de pesquisa avançada com CRUD para administradores do sistema;
+    * Vai possuir tela de visualização e seleção da nação para usuários comuns do sistema.
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
