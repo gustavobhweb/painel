@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,8 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://localhost:8000/
+	',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +79,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => '$2a$08$McyIAAU4YxpUP4hI8xT',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
