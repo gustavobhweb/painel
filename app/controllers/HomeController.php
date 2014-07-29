@@ -2,9 +2,13 @@
 
 class HomeController extends BaseController {
 
-    public function anyIndex()
+    public function getIndex()
     {
+        return View::make('home.index');
+    }
 
+    public function postIndex()
+    {
     }
 
 }
