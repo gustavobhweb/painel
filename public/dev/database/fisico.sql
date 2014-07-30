@@ -59,7 +59,7 @@ FOREIGN KEY(tipo_id) REFERENCES tipos(id)
 );
 
 INSERT INTO usuarios(id, nome, username, password, sexo, dataCad, tipo_id)
-VALUES(NULL, 'Gustavo Carmo Costa Souza', 'gustavobhweb@gmail.com', '$2y$10$BhJtAi8yp8zba6BIC0ZSHOCQTpj8aK6XPHjAe1S5WraGtMzbnXrqy', 'm', '2014-07-29 14:24:11', 1);
+VALUES(NULL, 'Gustavo Carmo Costa Souza', 'gustavobhweb@gmail.com', '$2a$08$7T3tEgdl91aNiobkZYgO6.hHZneEiBRfvoybEOHMf0HQ12gohHYBG', 'm', '2014-07-29 14:24:11', 1);
 
 CREATE TABLE dados_classificacao(
 id INT UNSIGNED AUTO_INCREMENT NOT NULL,

@@ -53,6 +53,6 @@ class UserController extends Controller {
 
     public function homeAction()
     {
-        echo Auth::user()->nome . ', seja bem-vindo!';
+        return View::make('user/home');
     }
 }
