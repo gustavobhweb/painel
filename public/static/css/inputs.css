@@ -1,1 +1,48 @@
 input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
+
+input{outline:none;}
+
+.txt-default{
+    margin:3px 0 0 0;
+    border:none;
+    padding:4px 5px;
+    font:16px Calibri;
+    background:#eeeeee;
+    border-radius:.3em;
+    border: 1px solid #b8b8b8;
+    color:#333333;
+    width:100%;
+    height:30px;
+}
+
+.txt-default:focus{
+    border:1px solid #999;
+}
+
+.btn-panel-1{
+    border-radius: .3em;
+    border:none;
+    background:#DDDDDD;
+    font:16px Calibri;
+    color:#222222;
+    padding:4px 10px;
+    transition:0.2s;
+}
+.btn-panel-1:hover{
+    background:#888888;
+    color:white;
+}
+.btn-panel-1:active{
+    padding:5px 9px 3px 11px;
+    background: #777777;
+    box-shadow:inset 1px 1px 2px #333333;
+}
+
+.btn-panel-2{
+    border-radius: .3em;
+    border:none;
+    background:#176CB0;
+    font:16px Calibri;
+    color:#ffffff;
+    padding:4px 10px;
+}

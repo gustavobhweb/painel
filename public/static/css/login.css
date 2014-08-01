@@ -1,0 +1,42 @@
+body{
+    background: url('../img/background.jpg') fixed;
+    background-size:100%;
+}
+#box-login{
+    position:fixed;
+    left:150px;
+    bottom: 100px;
+    width:400px;
+    background:transparent;
+    padding:0 0 20px 0;
+    border-radius:10px;
+    box-shadow:0 0 10px #000000;
+    background-image: linear-gradient(to top, rgba(0,0,0,0.64), rgba(51,51,51,0.64));
+}
+#box-login label{
+    font:16px Calibri;
+    color:#DDDDDD;
+    margin:0;
+    padding: 8px 0 0 0
+}
+#box-login form{
+    padding:0 20px;
+    margin:15px 0 0 0;
+}
+#box-login h4{
+    width:100%;
+    padding:5px 0;
+    margin:0;
+    background: #DDDDDD;
+    color:#333333;
+    text-align: center;
+    font:18px Calibri;
+    font-style:italic;
+    border-radius:10px 10px 0 0;
+    font-weight: bold;
+}
+/*
+.txt-email{margin-bottom:10px;width:80%}
+.txt-pass{margin-bottom:10px;width:80%}
+.btn-send-panel{float:left;}
+*/
