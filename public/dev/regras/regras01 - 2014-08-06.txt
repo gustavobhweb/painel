@@ -1,0 +1,8 @@
+* Primeiro acesso do usuário, ele deve escolher uma liga para jogar e seu respectivo time;
+* Quando escolher o time, o jogador deve escolher os jogadores que jogarão em seu time nesta liga (cada um no valor 
+de 4000,00);
+* Após tudo finalizado, o jogador será colocado na classificação da liga;
+* Quando a lista estiver fechada e os times estiverem prontos, o jogador deverá marcar o seu primeiro jogo;
+* Quando o jogo finalizar, o jogador deverá incluir os dados do jogo no sistema e o adversário deverá confirmar, 
+ou vice-versa. O adversário terá um tempo limite (definido pelo ADM) para confirmar o jogo;
+* Usuário poderá editar seu perfil, visualizar perfil de outro usuário e interagir com outro usuário;
