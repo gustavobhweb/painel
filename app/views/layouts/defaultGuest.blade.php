@@ -5,15 +5,7 @@
         <title>Painel Titãs</title>
 
         {{ HTML::style('static/css/dist/bootstrap.min.css') }}
-        {{ HTML::style('static/css/defaults/defaultGuestSmall.css', [
-            "media" => "screen and (min-width: 0px) and (max-width: 599px)"
-        ]) }}
-        {{ HTML::style('static/css/defaults/defaultGuestMedium.css', [
-            "media" => "screen and (min-width: 600px) and (max-width: 999px)"
-        ]) }}
-        {{ HTML::style('static/css/defaults/defaultGuestLarge.css', [
-            "media" => "screen and (min-width: 1000px)"
-        ]) }}
+        {{ HTML::style('static/css/defaults/defaultGuest.css') }}
         {{ HTML::style('static/css/inputs.css') }}
         @yield('styles')
 

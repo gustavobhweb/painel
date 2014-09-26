@@ -1,0 +1,73 @@
+body{
+    background: url('../../img/bg_auth.jpg') fixed;
+    background-size:100%;
+}
+.mercado{
+    width:23.5%;
+    padding:8px;
+    box-sizing: border-box;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(51, 51, 51, 0.8));
+    margin: 16px 0 0 16px;
+    float:left;
+}
+.mercado > .title-img{
+    background: url(../../img/mercado-title.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 110px;
+    box-shadow: inset -2px -2px 2px 1px rgba(0, 0, 0, 0.4);
+}
+.mercado > .mercado-content{
+    background: #F3BB87;
+    width: 100%;
+    min-height: 500px;
+    margin: 8px 0 0 0;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+}
+.menu{
+    width: 73%;
+    height: 69px;
+    background: url(../../img/bg/menu.png) repeat-x;
+    float: right;
+    margin:16px 16px 0 0;
+}
+.menu ul{
+    list-style: none;
+    margin: 28px 0 0 10px;
+    float:left;
+    padding: 0
+}
+.menu ul li{
+    display: inline;
+    border-right: 2px solid #CB4441;
+    padding: 5px 8px 5px 5px
+}
+.menu ul li:last-child{
+    border:none;
+}
+.menu ul li a{
+    font: 20px Roboto;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-decoration: none
+}
+.menu ul li a:hover{
+    text-shadow: 0 0 8px #ffffff;
+}
+.profile{
+    width: 336px;
+    height: 164px;
+    float:right;
+    margin: 3px 16px 0 0;
+    background: url(../../img/bg/profile.png) repeat-x;
+}
+.profile h3{
+    font: 22px Roboto;
+    color: #C9D600;
+    font-weight: 300;
+    text-shadow:  2px 2px 2px #000000;
+}
+
+
+

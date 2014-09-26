@@ -5,8 +5,9 @@
         <title>{{ Auth::user()->nome }}</title>
 
         {{ HTML::style('static/css/dist/bootstrap.min.css') }}
-        {{ HTML::style('static/css/defaultAuth.css') }}
+        {{ HTML::style('static/css/defaults/defaultAuth.css') }}
         {{ HTML::style('static/css/inputs.css') }}
+        {{ HTML::style('http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900') }}
         @yield('styles')
 
         {{ HTML::script('static/js/jquery-1.11.1.min.js') }}
@@ -16,12 +17,32 @@
     <body>
 
         <div class='header'>
-            <p class='pull-left'>{{ Auth::user()->nome }}, seja bem-vindo</p>
-            <a class='pull-right btn btn-danger' href="{{ URL::route('user/logout') }}"><i class="glyphicon glyphicon-remove"></i> Sair</a>
+            <!-- <p class='pull-left'>{{ Auth::user()->nome }}, seja bem-vindo</p>
+            <a class='pull-right btn btn-danger' href="{{ URL::route('user/logout') }}"><i class="glyphicon glyphicon-remove"></i> Sair</a> -->
             @yield('header')
         </div><!-- .header -->
 
         <div class='content'>
+            <div class='mercado'>
+                <div class='title-img'></div>
+                <div class='mercado-content'></div>
+            </div><!-- .mercado -->
+            <div class='menu'>
+                <ul>
+                    <li><a href='#'>Classificação</a></li>
+                    <li><a href='#'>Artilharia</a></li>
+                    <li><a href='#'>Estatística</a></li>
+                    <li><a href='#'>Noticiário</a></li>
+                    <li><a href='#'>Torneio/Copa</a></li>
+                    <li><a href='#'>Fórum</a></li>
+                </ul>
+            </div><!-- .menu -->
+            <div class='profile'>
+                <h3>{{{ Auth::user()->username }}}</h3>
+                <img src="{{{ Auth::user()->img_fullsrc }}}" width="104" height="104" />
+                <p>Salário atual 11.100,00</p>
+                <p>Salários a pagar11.100,00</p>
+            </div><!-- .profile -->
             @yield('content')
         </div><!-- .content -->
 
