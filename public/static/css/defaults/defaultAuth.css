@@ -1,6 +1,7 @@
 body{
     background: url('../../img/bg_auth.jpg') fixed;
-    background-size:100%;
+    background-size:cover;
+	min-width:1000px
 }
 .mercado{
     width:23.5%;
@@ -51,7 +52,7 @@ body{
     font-weight: 300;
     color: #FFFFFF;
     text-decoration: none
-}
+}   
 .menu ul li a:hover{
     text-shadow: 0 0 8px #ffffff;
 }
@@ -61,6 +62,7 @@ body{
     float:right;
     margin: 3px 16px 0 0;
     background: url(../../img/bg/profile.png) repeat-x;
+	position: relative;
 }
 .profile h3{
     font: 22px Roboto;
@@ -68,6 +70,10 @@ body{
     font-weight: 300;
     text-shadow:  2px 2px 2px #000000;
 }
-
+.profile img{
+	position:absolute;
+	right: 0;
+	top: -20px
+}
 
 
