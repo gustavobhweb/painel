@@ -42,10 +42,20 @@ $(function(){
 	});
 	$('#file').on('change', function(){
 		var file = $(this).prop('files')[0];
-		url = URL.createObjectURL(file);
+		var url = URL.createObjectURL(file);
 		$('.account-options').hide(0, function(){
-			console.log(url);
-			$('.crop-image').fadeIn();
+			$('.crop-image').fadeIn('slow', function(){
+				jcrop.new({
+					obj: '.crop', 
+					src: url,
+					onCrop: function(params){
+						// $.ajax({
+						// 	url: '',
+							
+						// });
+					}
+				});
+			});
 		});
 	});
 	$('.btn-open-webcam').on('click', function(){

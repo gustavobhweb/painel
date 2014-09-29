@@ -2,9 +2,12 @@
 
 @section('styles')
 	{{ HTML::style('static/css/account.css') }}
+	{{ HTML::style('static/css/crop.css') }}
 @stop
 
 @section('scripts')
+	{{ HTML::script('static/js/crop.js') }}
+	{{ HTML::script('static/js/jcrop.js') }}
 	{{ HTML::script('static/js/account.js') }}
 @stop
 
@@ -68,7 +71,7 @@
 
 		<div class='crop-image'>
 			<input type='file' id='file' />
-			<button class='btn btn-info btn-sm btn-back-account-options'>Voltar</button>
+			<div class='crop'><p style='color:white;text-align:center;padding:0 0 10px 0;font:20px Roboto;font-weight:300'>Aguarde...</p></div>
 		</div><!-- .crop-image -->
 
 		<div class='webcam-capture'>
