@@ -37,17 +37,21 @@
                     <li><a href='#'>Fórum</a></li>
                 </ul>
             </div><!-- .menu -->
+            
             <div class='profile'>
                 <a href='/logout' class='logout'>Sair</a>
+                <a href='/user/account' class='account-link'>Minha conta</a>
                 <h3>{{{ Auth::user()->username }}}</h3>
-                <img src="{{{ Auth::user()->img_fullsrc }}}" width="104" height="104" />
+                <img src="{{{ URL::to(Auth::user()->img_fullpath) }}}" width="104" height="104" />
                 <div class='money'>
                     <p>Salário atual 11.100,00</p>
-                    <p>Salários a pagar11.100,00</p>
+                    <p>Salários a pagar 11.100,00</p>
                     <h4>Saldo Draft 7.300,00</h4>
                 </div><!-- .money -->
             </div><!-- .profile -->
+
             @yield('content')
+
         </div><!-- .content -->
 
         <div class='footer'>

@@ -47,9 +47,9 @@ INSERT INTO tipos(id, nome) VALUES(NULL, 'Administrador'),(NULL, 'Usuário comum
 CREATE TABLE usuarios(
 id INT UNSIGNED AUTO_INCREMENT NOT NULL,
 nome VARCHAR(100) NOT NULL,
-username VARCHAR(200) NOT NULL,
+username VARCHAR(100) NOT NULL,
 password TEXT NOT NULL,
-sexo CHAR(1) NOT NULL,
+email VARCHAR(200) NOT NULL,
 dataCad DATETIME NOT NULL,
 tipo_id INT UNSIGNED NOT NULL,
 remember_token TEXT NULL,

@@ -1,1 +1,18 @@
 @extends('layouts.defaultAuth')
+
+@section('styles')
+	{{ HTML::style('static/css/home.css') }}
+@stop
+
+@section('scripts')
+	{{ HTML::script('static/js/home.js') }}
+@stop
+
+@section('content')
+	@if(!$verificarParticipacao)
+		<div id='sugestaoParticipacao'>
+			<p>{{{ explode(' ', Auth::user()->nome)[0] }}}, você não está participando de nenhuma liga.</p>
+			<button class='btn btn-success'><i class='glyphicon glyphicon-ok'></i> Participar de uma liga</button>
+		</div><!-- .sugestaoParticipacao -->
+	@endif
+@stop
