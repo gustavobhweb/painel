@@ -47,20 +47,20 @@ INSERT INTO tipos(id, nome) VALUES(NULL, 'Administrador'),(NULL, 'Usuário comum
 CREATE TABLE usuarios(
 id INT UNSIGNED AUTO_INCREMENT NOT NULL,
 nome VARCHAR(100) NOT NULL,
-username VARCHAR(200) NOT NULL,
+username VARCHAR(100) NOT NULL,
 password TEXT NOT NULL,
-sexo CHAR(1) NOT NULL,
+email VARCHAR(200) NOT NULL,
 dataCad DATETIME NOT NULL,
 tipo_id INT UNSIGNED NOT NULL,
 remember_token TEXT NULL,
 updated_at DATETIME NULL,
-img_fullpath VARCHAR(255),
+img_fullpath VARCHAR(255) DEFAULT 'users/profile/default.jpg',
 PRIMARY KEY(id),
 FOREIGN KEY(tipo_id) REFERENCES tipos(id)
 );
 
-INSERT INTO usuarios(id, nome, username, password, sexo, dataCad, tipo_id)
-VALUES(NULL, 'Gustavo Carmo Costa Souza', 'Gubhweb', '$2a$08$7T3tEgdl91aNiobkZYgO6.hHZneEiBRfvoybEOHMf0HQ12gohHYBG', 'm', '2014-07-29 14:24:11', 1);
+INSERT INTO usuarios(id, nome, username, password, dataCad, tipo_id)
+VALUES(NULL, 'Gustavo Carmo Costa Souza', 'Gubhweb', '$2a$08$7T3tEgdl91aNiobkZYgO6.hHZneEiBRfvoybEOHMf0HQ12gohHYBG', '2014-07-29 14:24:11', 1);
 
 CREATE TABLE dados_classificacao(
 id INT UNSIGNED AUTO_INCREMENT NOT NULL,

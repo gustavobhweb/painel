@@ -17,4 +17,6 @@ Route::group(["before" => "auth"], function(){
         "as" => "user/logout",
         "uses" => "UserController@logoutAction"
     ]);
+
+    Route::controller("user", "UserController");
 });
