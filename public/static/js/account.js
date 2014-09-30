@@ -42,21 +42,43 @@ $(function(){
 	});
 	$('#file').on('change', function(){
 		var file = $(this).prop('files')[0];
-		var url = URL.createObjectURL(file);
-		$('.account-options').hide(0, function(){
-			$('.crop-image').fadeIn('slow', function(){
-				jcrop.new({
-					obj: '.crop', 
-					src: url,
-					onCrop: function(params){
-						// $.ajax({
-						// 	url: '',
-							
-						// });
-					}
+		var ext = $(this).val().split('.').slice(-1)[0];
+	    regexpExtension = /(png|jpg|jpeg|gif)/gi;
+	    if (!regexpExtension.test(ext)) {
+	    	alert('O tipo de arquivo selecionado é inválido!');
+	    } else {
+			var url = URL.createObjectURL(file);
+			$('.account-options').hide(0, function(){
+				$('.crop-image').fadeIn('slow', function(){
+					jcrop.new({
+						obj: '.crop', 
+						src: url,
+						onCrop: function(params){
+							var reader = new FileReader();
+							reader.onload = function(e){
+								base64 = reader.result;
+								base64 = base64.replace(/data:image\/.+;base64,/, '');
+								$.ajax({
+									url: '/user/ajax-crop-image?' + params,
+									type: 'POST',
+									dataType: 'json',
+									data: {
+										base64: base64
+									},
+									success: function(response){
+										window.location.reload();
+									},
+									error: function(){
+										alert('Problemas na conexão! Atualize a página e tente novamente.');
+									}
+								});
+							}
+							reader.readAsDataURL(file);
+						}
+					});
 				});
 			});
-		});
+		}
 	});
 	$('.btn-open-webcam').on('click', function(){
 		$('.account-options').hide(0, function(){

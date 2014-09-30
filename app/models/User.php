@@ -53,4 +53,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return true;
     }
 
+    public static function updateImage($fullpath)
+    {
+        $user = Auth::user();
+        $user->img_fullpath = $fullpath;
+        $user->save();
+    }
+
 }

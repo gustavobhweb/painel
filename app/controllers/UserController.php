@@ -164,4 +164,30 @@ class UserController extends Controller {
             ]);
         }
     }
+
+    public function postAjaxCropImage()
+    {
+        $x = Input::get('x');
+        $y = Input::get('y');
+        $w = Input::get('w');
+        $h = Input::get('h');
+        $image = Input::get('base64');
+
+        if (file_exists(Auth::user()->img_fullpath)) unlink(Auth::user()->img_fullpath);
+
+        $base64 = base64_decode($image);
+        $im = imagecreatefromstring($base64);
+        $ds = DIRECTORY_SEPARATOR;
+        $fullpath = "users{$ds}profile{$ds}" . md5(uniqid(time())) . '.jpg';
+
+        $dest = imagecreatetruecolor(300, 300);
+
+        imagecopyresampled($dest, $im, 0, 0, $x, $y, 300, 300, $w, $h);
+
+        imagejpeg($dest, $fullpath);
+        User::updateImage($fullpath);
+        return Response::json([
+            'debug' => 'ok'
+        ]);
+    }
 }
