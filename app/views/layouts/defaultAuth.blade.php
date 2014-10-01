@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Painel Titãs - {{ Auth::user()->username }}</title>
 
         {{ HTML::style('static/css/dist/bootstrap.min.css') }}

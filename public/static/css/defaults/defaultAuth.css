@@ -1,6 +1,7 @@
 body{
     background: url('../../img/bg_auth.jpg') fixed;
-    background-size:cover;
+    background-repeat: no-repeat;
+    background-size:100%;
 	min-width:1200px;
 }
 button, input{

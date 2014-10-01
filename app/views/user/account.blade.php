@@ -3,12 +3,15 @@
 @section('styles')
 	{{ HTML::style('static/css/account.css') }}
 	{{ HTML::style('static/css/crop.css') }}
+	{{ HTML::style('static/css/imgSelect.css') }}
 @stop
 
 @section('scripts')
 	{{ HTML::script('static/js/crop.js') }}
 	{{ HTML::script('static/js/jcrop.js') }}
 	{{ HTML::script('static/js/account.js') }}
+	{{ HTML::script('static/js/imgSelect.min.js') }}
+	{{ HTML::script('static/js/jcam.js') }}
 @stop
 
 @section('content')
@@ -19,7 +22,7 @@
 			<div class='left'>
 				<img src='{{{ URL::to(Auth::user()->img_fullpath) }}}' width='170' />
 				<button class='btn btn-default btn-xs btn-select-image'><i class='glyphicon glyphicon-picture'></i> Selecionar imagem...</button>
-				<button class='btn btn-default btn-xs btn-open-webcam'><i class='glyphicon glyphicon-camera'></i> Tirar foto pela webcam</button>
+				<button class='btn btn-default btn-xs btn-open-webcam' onclick='$(".imgs-webcam").click()'><i class='glyphicon glyphicon-camera'></i> Tirar foto pela webcam</button>
 			</div><!-- .left -->
 			<div class='right'>
 				<form name='frm-change-name' class='form-inline'>
@@ -75,8 +78,18 @@
 		</div><!-- .crop-image -->
 
 		<div class='webcam-capture'>
-			<button class='btn btn-info btn-sm btn-back-account-options'>Voltar</button>
-		</div><!-- .webcam-capture -->
+			<div id="imgselect_container">
+		        <button type="button" class="btn btn-success imgs-webcam hide">Webcam</button>
 
+				<div class="imgs-webcam-container"></div>
+				
+				<!-- Action buttons -->
+				<button type="button" class="btn btn-primary imgs-capture">Capture</button> <!-- .imgs-capture -->
+				<button type="button" class="btn btn-default imgs-cancel hide">Cancel</button> <!-- .imgs-cancel -->
+				<button class="btn btn-cancel btn-back-account-options" onclick="$('.imgs-cancel').click()">Voltar</button>
+
+				<div class="imgs-alert alert"></div> <!-- .imgs-alert -->
+	        </div>
+		</div><!-- .webcam-capture -->
 	</div><!-- .account -->
 @stop

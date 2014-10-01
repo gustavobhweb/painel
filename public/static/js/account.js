@@ -1,4 +1,6 @@
 $(function(){
+	jcam.init('#imgselect_container');
+
 	$('.btn-email').on('click', function(){
 		$('.group-btn-account').hide(0, function(){
 			$('#frm-change-mail').fadeIn();
@@ -65,6 +67,9 @@ $(function(){
 									data: {
 										base64: base64
 									},
+									beforeSend: function(){
+										$('.btn-crop-image').html('Salvando...');
+									},
 									success: function(response){
 										window.location.reload();
 									},
@@ -90,6 +95,7 @@ $(function(){
 			$('.account-options').fadeIn();
 		});
 	});
+
 });
 
 function changeMail(data)

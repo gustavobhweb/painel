@@ -190,4 +190,13 @@ class UserController extends Controller {
             'debug' => 'ok'
         ]);
     }
+
+    public function postSnapWebcam()
+    {
+        $base64 = Input::get('file');
+
+        $im = imagecreatefromstring(base64_decode($base64));
+        $dest = imagecreatetruecolor(300, 300);
+        imagecopyresampled($dest, $im, 0, 0, src_x, src_y, dst_w, dst_h, src_w, src_h);
+    }
 }
