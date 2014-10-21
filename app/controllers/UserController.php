@@ -16,7 +16,8 @@ class UserController extends Controller {
             "errors" => $errors
         ];
 
-        if (Input::server("REQUEST_METHOD") == "POST") {
+
+        if (Request::isMethod('post')) {
             $validator = Validator::make(Input::all(), [
                 "username" => "required",
                 "password" => "required"
@@ -29,6 +30,7 @@ class UserController extends Controller {
                 ];
 
                 if (Auth::attempt($credentials)) {
+                	Session::put('user', Auth::user()->toArray());
                     return Redirect::route("user/home");
                 }
             }
@@ -48,11 +50,12 @@ class UserController extends Controller {
     public function logoutAction()
     {
         Auth::logout();
+        Session::flush();
         return Redirect::route("user/login");
     }
 
     public function homeAction()
-    {
+    {   
         $viewVars['verificarParticipacao'] = LigaUsuarioClube::verificarParticipacao();
         return View::make('user/home', $viewVars);
     }

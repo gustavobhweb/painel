@@ -13,10 +13,20 @@ Route::group(["before" => "auth"], function(){
         "uses" => "UserController@homeAction"
     ]);
 
-    Route::any("/logout", [
-        "as" => "user/logout",
-        "uses" => "UserController@logoutAction"
-    ]);
-
     Route::controller("user", "UserController");
 });
+
+Route::group(['before' => 'auth_admin'], function(){
+
+    Route::get('/admin', [
+        'as' => 'admin',
+        'uses' => "AdminController@indexAction"
+    ]);
+
+    Route::controller('admin', 'AdminController');
+});
+
+Route::any("/logout", [
+    "as" => "user/logout",
+    "uses" => "UserController@logoutAction"
+]);

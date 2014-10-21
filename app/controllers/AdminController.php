@@ -2,9 +2,14 @@
 
 class AdminController extends BaseController {
 
-    public function anyIndex()
+    public function indexAction()
+    {	
+        return View::make('admin.index');
+    }
+
+    public function anyTeste() 
     {
-        echo "Sou Admin";
+
     }
 
 }

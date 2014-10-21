@@ -1,0 +1,107 @@
+*{margin:0;padding: 0}
+
+div.wm-modal, div.wm-modal * {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+div.wm-modal{
+    font-family: Arial;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+
+section.wm-modal-box{
+    border-radius: 10px 10px 5px 5px;
+    top:25%;
+    margin:0 auto;
+    position: relative;
+    width: 400px;
+    min-height: 200px;
+    background: rgba(0,0,0,0.64);
+    box-shadow: 0 3px 10px #000;
+}
+
+section.wm-modal-box header.wm-modal-header{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    min-height: 10%;
+    padding:10px;
+    background: #DDDDDD;
+}
+.wm-modal-title{
+    text-align: center;
+    color:#333333;
+    font-family: 'Calibri';
+    font-style: italic;
+}
+
+section.wm-modal-box div.wm-modal-body{
+    color:white;
+    overflow-y: auto;
+    min-height: 70%;
+    margin:10px;
+}
+
+section.wm-modal-box footer.wm-modal-footer{
+    padding:10px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: transparent;
+}
+
+
+section.wm-modal-box .wm-modal-close{
+    text-decoration: none;
+    color:inherit;
+    font-weight: bold;
+    outline: none;
+    float: right;
+}
+
+section.wm-modal-box .wm-btn{
+    border:thin solid #aaa;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #eee;
+    background-image: linear-gradient(#fff, #ccc);
+    color:#555;
+    outline: none;
+    cursor: pointer;
+}
+
+section.wm-modal-box .wm-btn:active{
+    background-image: linear-gradient(#ccc, #fff);
+}
+
+section.wm-modal-box .wm-btn.wm-modal-btn-confirm{
+    background-color: #333;
+    background-image: linear-gradient(#333, #222);
+    color:#eee;
+    border:thin #000 solid;
+}
+section.wm-modal-box .wm-btn.wm-modal-btn-confirm:active{
+    background-image: linear-gradient(#222, #333);
+}
+
+.wm-modal-right{
+    text-align: right;
+}
+.wm-input-prompt{
+    margin: 0;
+    display: block;
+    width: 100%;
+    height: 28px;
+    border:thin solid #333;
+    border-radius: 4px;
+}
