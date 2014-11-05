@@ -202,4 +202,23 @@ class UserController extends Controller {
         $dest = imagecreatetruecolor(300, 300);
         imagecopyresampled($dest, $im, 0, 0, src_x, src_y, dst_w, dst_h, src_w, src_h);
     }
+
+
+    public function route()
+    {
+        $auth = Auth::user();
+
+        if (Auth::guest()) {
+            return Redirect::route('user/login');
+        } elseif (Auth::check() && $auth->tipo_id == 1) {
+            return Redirect::route('admin');
+        } elseif (Auth::check() && $auth->tipo_id == 2) {
+            return Redirect::route('user/home');
+        }
+    }
+
+    public function anyParticiparLiga()
+    {
+        return View::make('user.participar');
+    }
 }

@@ -18,7 +18,7 @@ Route::group(["before" => "auth"], function(){
 
 Route::group(['before' => 'auth_admin'], function(){
 
-    Route::get('/admin', [
+    Route::any('/admin', [
         'as' => 'admin',
         'uses' => "AdminController@indexAction"
     ]);

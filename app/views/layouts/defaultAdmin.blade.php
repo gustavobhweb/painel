@@ -6,7 +6,7 @@
         <title>Painel Titãs - {{{ Session::get('user.username') }}}</title>
 
         {{ HTML::style('static/css/dist/bootstrap.min.css') }}
-        {{ HTML::style('static/css/defaults/defaultAuth.css') }}
+        {{ HTML::style('static/css/defaults/defaultAdmin.css') }}
         {{ HTML::style('static/css/inputs.css') }}
         {{ HTML::style('http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900') }}
         @yield('styles')
@@ -23,18 +23,15 @@
         </div><!-- .header -->
 
         <div class='content'>
-            <div class='mercado'>
-                <a href="#"><div class='title-img'></div></a>
-                <div class='mercado-content'></div>
+            <div class='sidebar-admin'>
+                <div class='sidebar-admin-content'>@yield('sidebar')</div>
             </div><!-- .mercado -->
             <div class='menu'>
                 <ul>
-                    <li><a href='#'>Classificação</a></li>
-                    <li><a href='#'>Artilharia</a></li>
-                    <li><a href='#'>Estatística</a></li>
-                    <li><a href='#'>Noticiário</a></li>
-                    <li><a href='#'>Torneio/Copa</a></li>
-                    <li><a href='#'>Fórum</a></li>
+                    <li>{{ HTML::link('admin', 'Cadastrar Liga') }}</li>
+                    <li>{{ HTML::link('admin/cadastrar-clube', 'Cadastrar Clube') }}</li>
+                    <li>{{ HTML::link('admin/cadastrar-jogador', 'Cadastrar Jogador') }}</li>
+                    <li>{{ HTML::link('#', 'Fórum') }}</li>
                 </ul>
             </div><!-- .menu -->
             
@@ -43,11 +40,6 @@
                 <a href='/user/account' class='account-link'>Minha conta</a>
                 <h3>{{{ Session::get('user.username') }}}</h3>
                 <img src="{{{ URL::to(Auth::user()->img_fullpath) }}}" width="104" height="104" />
-                <div class='money'>
-                    <p>Salário atual 11.100,00</p>
-                    <p>Salários a pagar 11.100,00</p>
-                    <h4>Saldo Draft 7.300,00</h4>
-                </div><!-- .money -->
             </div><!-- .profile -->
 
             @yield('content')
