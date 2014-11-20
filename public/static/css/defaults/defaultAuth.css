@@ -131,3 +131,30 @@ button, input{
 .profile > .account-link:hover{
     text-decoration: underline;
 }
+
+
+.smooth-color{
+    background:rgba(0, 0, 0, 0.6);
+    color:rgba(255,255,255,0.8);
+    border-color:#222;
+}
+.smooth-color a{
+    color:#C9D600;
+}
+
+.wm-smooth-box{
+    background:rgba(0, 0, 0, 0.6);
+    box-sizing:border-box;
+    padding:10px;
+    border-radius: 5px;
+    margin:5px;
+    color:rgba(255,255,255,0.8);
+    font-family: "Segoe UI"
+}
+
+.yield-content{
+    float: left;
+    width: 650px;
+    margin-left: 7px;
+}
+

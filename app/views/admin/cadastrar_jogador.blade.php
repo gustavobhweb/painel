@@ -51,7 +51,7 @@
 
 
     <div class="inputs-container medium">
-    {{ Form::label('posicao_id', 'Naturalidade') }}
+    {{ Form::label('posicao_id', 'Posição em campo') }}
     {{ 
     	Form::select(
     		'posicao_id',
@@ -60,6 +60,16 @@
     	) 
     }}
     {{ $errors->first('posicao_id')  }}
+    </div>
+
+    <div class="inputs-container medium">
+        {{ Form::label('foto', 'Foto') }}
+        {{ Form::file('foto', ['id' => 'hidden-file', 'style' => 'display:none']) }}
+        <div>
+        {{ Form::button('selecionar foto ...', ['id' => 'fake-file-name', 'class' => 'btn btn-file']) }}
+        </div>
+
+        {{ $errors->first('foto')  }}
     </div>
 
 
@@ -83,6 +93,5 @@
 
 
 @section('scripts')
-
-
+{{ HTML::script('static/js/admin/cadastrar_jogador.js') }}
 @stop	

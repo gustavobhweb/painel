@@ -1,0 +1,32 @@
+.content li{
+	list-style: none;
+}
+
+.lista-clubes{
+	margin:10px 0;
+	width: 50%;
+}
+
+.lista-clubes li{
+	cursor: pointer;
+}
+
+.clube-item{
+	
+}
+
+#clube-selecionado{
+    margin:10px 0;
+}
+
+
+#box-autocomplete-jogadores{
+	position: relative;
+	min-height: 100px;
+
+}
+
+#select-players-ajax
+{
+	position: absolute;
+}

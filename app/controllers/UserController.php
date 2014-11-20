@@ -217,8 +217,62 @@ class UserController extends Controller {
         }
     }
 
-    public function anyParticiparLiga()
+    public function anyLigas()
     {
-        return View::make('user.participar');
+        $ligas = Liga::select(['nome', 'logo', 'info', 'id'])->paginate(15);
+
+        return View::make(
+            'user.ligas',
+            compact('ligas')
+        );
+    }
+
+
+
+    public function anyParticiparLiga($liga_id = null)
+    {
+
+        $liga = Liga::find($liga_id);
+        $paises = Nacao::orderBy('nome')->lists('nome', 'id');
+
+        if (Input::has('clube_sistema_id')) {
+            $clube = Clube::find(Input::get('clube_sistema_id'));
+        }
+
+        return View::make(
+                'user.participar_liga',
+                compact('liga', 'paises', 'clube')
+        );
+    }
+
+
+    public function getAjaxClubes()
+    {
+        if (!Request::ajax()) {
+            throw new \UnexpectedValueException('Requisição deve ser ajax');
+        }
+
+        $nacao_id = filter_var(Input::get('nacao_id'));
+        $clubes = Clube::where('nacao_sistema_id', '=', $nacao_id)->get();
+
+        return Response::json($clubes);
+    }
+
+
+    public function getAjaxListarJogadores()
+    {
+        if (!Request::ajax()) {
+            throw new \UnexpectedValueException('Requisição deve ser ajax');
+        }
+
+        $nome = filter_var(Input::get('nome'));
+        $liga_id = filter_var(Input::get('liga_id'));
+
+        $jogadores = LigaJogador::jogadoresDisponiveis($liga_id)
+                            ->where('nome', 'LIKE', "%$nome%")
+                            ->get();
+
+
+        return Response::json($jogadores);
     }
 }

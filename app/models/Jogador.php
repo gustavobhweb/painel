@@ -10,4 +10,6 @@ class Jogador extends Eloquent {
     ];
 
     public $timestamps = false;
+
+
 }

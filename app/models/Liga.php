@@ -6,6 +6,6 @@ class Liga extends Eloquent {
 
     public $timestamps = false;
 
-    protected $fillable = ['nome', 'dataInicio', 'dataFim', 'info'];
+    protected $fillable = ['nome', 'dataInicio', 'dataFim', 'info', 'logo'];
 
 }

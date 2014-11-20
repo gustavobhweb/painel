@@ -1,0 +1,22 @@
+#box-liga-info {
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+#box-liga-info  #img-container {
+    float: left;
+    padding:0 10px;
+    width: 30%;
+}
+
+#box-liga-info #info-container {
+    background: rgba(100,100,100,0.2);
+    float: right;
+    width: 70%;
+    padding:0 10px;
+}
+
+.btn.btn-modal-info {
+    background-image: linear-gradient(to bottom, #333, #000);
+    border:thin solid #222;
+}

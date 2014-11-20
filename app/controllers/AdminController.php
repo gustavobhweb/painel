@@ -10,7 +10,6 @@ class AdminController extends BaseController
     ];
 
 
-
     public function indexAction()
     {   
 
@@ -70,7 +69,8 @@ class AdminController extends BaseController
                 'nome'       => 'required',
                 'dataInicio' => 'required|regex: /\d{2}\/\d{2}\/\d{4}/',
                 'dataFim'    => 'required|regex: /\d{2}\/\d{2}\/\d{4}/',
-                'info'       => 'required'
+                'info'       => 'required',
+                'logo'       => 'required|mimes:jpg,png,gif,jpeg'
             ];
 
             $messages = [
@@ -80,11 +80,23 @@ class AdminController extends BaseController
             ];
 
             $inputs = Input::only('nome', 'dataInicio', 'dataFim', 'info');
-            $validation = Validator::make($inputs, $rules, $messages);
+            $validation = Validator::make(Input::all(), $rules, $messages);
+
 
            if ($validation->passes()) {
 
                try {
+
+                   $dir = public_path('ligas/');
+
+                   $extension = Input::file('logo')->getClientOriginalExtension();
+
+                   $filename = md5(uniqid()) . ".$extension";
+
+                   Input::file('logo')->move($dir, $filename);
+
+
+                   $inputs['logo'] = $filename;
 
                    $inputs['dataInicio'] = DateTime::createFromFormat('d/m/Y', $inputs['dataInicio'])
                                                    ->format('Y-m-d');
@@ -93,7 +105,9 @@ class AdminController extends BaseController
                                                  ->format('Y-m-d');    
                    $liga->fill($inputs)->save();
 
-                   return Redirect::back()->with(['message' => 'Liga atualizada com successo!']);
+                   return Redirect::back()->with([
+                        'message' => 'Liga atualizada com sucesso!'
+                    ]);
 
                } catch (\InvalidArgumentException $e) {
                     return Redirect::back()
@@ -111,7 +125,6 @@ class AdminController extends BaseController
 
     public function anyCadastrarClube()
     {   
-
 
         if (Request::isMethod('post')) {
             $rules = [
@@ -159,16 +172,32 @@ class AdminController extends BaseController
                 'nacao_sistema_id'  => 'required|exists:nacoes_sistema,id',
                 'posicao_id'        => 'required|exists:posicoes,id',
                 'nome'              => 'required',
-            ];
+                'foto'              => 'required'
+            ]; 
 
             $inputs = Input::except('_token');
 
             $validation = Validator::make($inputs, $rules, $this->messages);
 
             if ($validation->passes()) {
+
+                if (Input::hasFile('foto')) {
+
+                    $ext = Input::file('foto')->getClientOriginalExtension();
+
+                    $filename = uniqid() . $ext;
+
+                    $dir = public_path("jogadores/");
+
+                    Input::file('foto')->move($dir, $filename);
+
+                    $inputs['foto'] = $filename;
+                }
+
                 Jogador::create($inputs);
+
             } else {
-                return Redirect::back()->withErrors($validation);
+                return Redirect::back()->withErrors($validation)->withInput();
             }
         }
 

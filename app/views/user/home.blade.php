@@ -12,7 +12,7 @@
 	@if(!$verificarParticipacao)
 		<div id='sugestaoParticipacao'>
 			<p>{{{ explode(' ', Auth::user()->nome)[0] }}}, você não está participando de nenhuma liga.</p>
-			<a class='btn btn-success' href="{{ URL::to('user/participar-liga') }}">
+			<a class='btn btn-success' href="{{ URL::to('user/ligas') }}">
 				<i class='glyphicon glyphicon-ok'></i> Participar de uma liga
 			</a>
 		</div><!-- .sugestaoParticipacao -->

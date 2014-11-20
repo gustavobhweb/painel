@@ -29,7 +29,7 @@ window.WmModal = (function(){
     statics = {
         priority    : 10,
         effectsShow     : ['fadeIn', 'show', 'slideDown', 'animate'],
-        include : function(url){
+        include : function(url) {
             xhr = new XMLHttpRequest();
             xhr.open('GET', url, false);
             xhr.send();
@@ -39,7 +39,7 @@ window.WmModal = (function(){
     };
     
     $('<link />', {
-        href: '/static/css/modal.css',
+        href: '/static/css/wmmodal.css',
         rel: 'stylesheet',
         type: 'text/css'
     }).appendTo('head');
@@ -67,10 +67,6 @@ window.WmModal = (function(){
             $linkClose  = $instance.find(elements.close),
             $btnCancel  = $instance.find(elements.btnCancel);
 
-        
-        
-        
-        console.log(statics);
 
         var defineModalType = function () {
             switch (settings.type) {
@@ -162,7 +158,7 @@ window.WmModal = (function(){
 
         this.setContentFromTemplate = function (templateSelector, data) {
             var template = $(templateSelector).html();
-            return this.setContent(_.template(template, data || {}));
+            return this.setContent(_.template(template).call(null, data || {}));
         }
 
 

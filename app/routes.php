@@ -1,5 +1,7 @@
 <?php
 
+Route::any('user/route', ['uses' => 'UserController@route']);
+
 Route::group(["before" => "guest"], function(){
     Route::any("/", [
         "as" => "user/login",
@@ -22,6 +24,8 @@ Route::group(['before' => 'auth_admin'], function(){
         'as' => 'admin',
         'uses' => "AdminController@indexAction"
     ]);
+
+
 
     Route::controller('admin', 'AdminController');
 });

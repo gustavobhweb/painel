@@ -12,7 +12,9 @@
         @yield('styles')
 
         {{ HTML::script('static/js/jquery-1.11.1.min.js') }}
+        {{ HTML::script('static/js/underscore.js') }}
         {{ HTML::script('static/js/defaultAuth.js') }}
+        {{ HTML::script('static/js/wmmodal.js') }}
         @yield('scripts')
     </head>
     <body>
@@ -51,7 +53,7 @@
                 </div><!-- .money -->
             </div><!-- .profile -->
 
-            @yield('content')
+            <section class="yield-content">@yield('content')</section>
 
         </div><!-- .content -->
 
