@@ -230,14 +230,77 @@ class UserController extends Controller {
 
 
     public function anyParticiparLiga($liga_id = null)
-    {
+    {   
+        $auth = Auth::user();
+
+        $ligaUsuario = LigaUsuarioClube::whereUsuarioId($auth->id)->whereLigaId($liga_id);
+
+        if ($ligaUsuario->count()) {
+
+            $ligaUsuario = $ligaUsuario->first();
+
+            if (! $ligaUsuario->ativo) {
+                
+                return Redirect::to("user/selecionar-jogadores-liga/{$ligaUsuario->liga_id}");
+
+            } else {
+
+                return Redirect::to('/');
+            }
+        }
+
+
 
         $liga = Liga::find($liga_id);
+
         $paises = Nacao::orderBy('nome')->lists('nome', 'id');
 
-        if (Input::has('clube_sistema_id')) {
-            $clube = Clube::find(Input::get('clube_sistema_id'));
+        if (Request::isMethod('post')) {
+
+            $clube = null;
+
+            try {
+
+                if (Input::has('clube_sistema_id')) {
+                    $clube = Clube::find(Input::get('clube_sistema_id'))->toArray();
+                }
+
+                $data = [
+                    'liga_id'          => $liga_id,
+                    'usuario_id'       => $auth->id,
+                    'clube_sistema_id' => Input::get('clube_sistema_id')
+                ];
+
+                $validator = LigaUsuarioClube::validateInputs($data);
+
+
+                if ($validator->passes()) {
+
+                    LigaUsuarioClube::create($data);
+
+                } else {
+
+                    return Redirect::back()
+                                ->withErrors($validator)
+                                ->withInput()
+                                ->withClube($clube);
+                }
+
+            } catch (Exception $e) {
+
+                $errors = [
+                    'message' => $e->getMessage()
+                ];
+
+                return Redirect::back()
+                                ->withErrors($errors)
+                                ->withInput()
+                                ->withClube($clube);
+            }
+
         }
+
+        
 
         return View::make(
                 'user.participar_liga',
@@ -261,18 +324,128 @@ class UserController extends Controller {
 
     public function getAjaxListarJogadores()
     {
-        if (!Request::ajax()) {
+        if (! Request::ajax()) {
             throw new \UnexpectedValueException('Requisição deve ser ajax');
         }
 
         $nome = filter_var(Input::get('nome'));
         $liga_id = filter_var(Input::get('liga_id'));
 
+        if (! LigaUsuarioClube::verificarParticipacao($liga_id)) {
+            return Response::json(['error' => 'acesso não autorizado'], 403);
+        }
+
         $jogadores = LigaJogador::jogadoresDisponiveis($liga_id)
                             ->where('nome', 'LIKE', "%$nome%")
+                            ->with('posicao')
                             ->get();
 
 
         return Response::json($jogadores);
+    }
+
+
+    public function getSelecionarJogadoresLiga($liga_id)
+    {
+        if (! LigaUsuarioClube::verificarParticipacao($liga_id)) {
+            return App::abort(403);            
+        }
+
+        $auth = Auth::user();
+
+        $liga = LigaUsuarioClube::whereLigaId($liga_id)->first();
+
+        $ligaJogadores = LigaJogador::whereUsuarioId($auth->id)
+                                ->whereLigaId($liga_id)
+                                ->get();
+
+        return View::make('user.selecionar-jogadores-liga', get_defined_vars());
+    }
+
+
+    public function postSelecionarJogadoresLiga($liga_id)
+    {
+
+        $ligaJogador = LigaJogador::whereLigaId($liga_id);
+
+        if ($ligaJogador->count() < 23) {
+            return Redirect::back()->withFail(true);
+        }
+
+
+        LigaUsuarioClube::whereLigaId($liga_id)
+                        ->whereUsuarioId(Auth::user()->id)
+                        ->update(['ativo' => 1]);
+
+        return Redirect::to('/home');
+
+    }
+
+    public function postAjaxCadastrarJogadorLiga()
+    {
+        $liga_id = Input::get('liga_id');
+        $jogador_id = Input::get('jogador_id');
+
+        $ligaJogador = LigaJogador::whereLigaId($liga_id);
+
+        if ($ligaJogador->count() >= 23) {
+            return Response::json([
+                'error' => 'Você já possui a escalação completa para essa liga'
+            ]);
+        }
+
+        if ($ligaJogador->whereJogadorId($jogador_id)->count()) {
+            return Response::json([
+                'error' => 'Esse jogador já foi cadastrado'
+            ]);   
+        }
+
+
+        $dadosJogadorLiga = [
+            'liga_id'    => $liga_id,
+            'jogador_id' => $jogador_id,
+            'usuario_id' => Auth::user()->id,
+        ];
+
+        $validator = LigaJogador::validateInputs($dadosJogadorLiga);
+
+        if ($validator->passes()) {
+
+            $data = LigaJogador::create($dadosJogadorLiga);
+
+            return Response::json(['data' => $data, 'error' => false]);
+
+        } else {
+
+            return Response::json(['error' => $validator->messages()]);
+            
+        }
+    }
+
+
+    public function postAjaxDeletarJogadorLiga()
+    {
+
+        if (Session::token() != Input::get('_token')) {
+            return Response::json(['error' => 'Acesso não autorizado'], 403);
+        }
+
+        $liga_id = Input::get('liga_id');
+        $jogador_id = Input::get('jogador_id');
+
+        $ligaJogador = LigaJogador::whereLigaId($liga_id)
+                                    ->whereJogadorId($jogador_id)
+                                    ->whereUsuarioId(Auth::user()->id);
+
+        if ($ligaJogador->count()) {
+
+            $ligaJogador->delete();
+
+            return Response::json(['error' => false]);
+
+        } else {
+
+            return Response::json(['error' => 'Erro ao processar o pedido']);
+        }
     }
 }

@@ -4,7 +4,7 @@
 
 <div class="col-xs-5 wm-smooth-box">
     <h3 class="text-center">Cadastrar Jogador</h3>
-    {{ Form::open(['autocomplete' => 'off']) }}
+    {{ Form::open(['autocomplete' => 'off', 'files' => true]) }}
     {{ Form::token() }}
     <div class="inputs-container">
     {{ Form::label('nome', 'Nome') }}

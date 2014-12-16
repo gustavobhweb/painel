@@ -36,7 +36,7 @@
                     <li><a href='#'>Artilharia</a></li>
                     <li><a href='#'>Estatística</a></li>
                     <li><a href='#'>Noticiário</a></li>
-                    <li><a href='#'>Torneio/Copa</a></li>
+                    <li><a href='{{ URL::to('user/ligas') }}'>Torneio/Copa</a></li>
                     <li><a href='#'>Fórum</a></li>
                 </ul>
             </div><!-- .menu -->

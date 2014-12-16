@@ -5,27 +5,46 @@
 {{ Form::hidden('liga_id', $liga->id) }}
 
 <div class="wm-smooth-box">
+
 <h3>Torneio {{{ $liga->nome }}}</h3>
 
-
-
 {{ Form::open() }}
-{{ Form::select('nacao_sistema_id', $paises, null, ['class' => 'form-control select-paises']) }}
-{{ Form::hidden('clube_sistema_id', Input::old('clube_sistema_id'), ['id' => 'clube-id']) }}
+
+{{ $errors->first('message', '<div>:message</div>') }}
+
+{{ 
+    Form::select(
+        'nacao_sistema_id',
+        $paises,
+        Input::old('nacao_sistema_id'),
+        ['class' => 'form-control select-paises']
+    )
+}}
+
+{{ $errors->first('nacao_sistema_id', '<div>:messages</div>') }}
+
+{{ 
+    Form::hidden(
+        'clube_sistema_id',
+        Input::old('clube_sistema_id'),
+        ['id' => 'clube-id']
+    ) 
+}}
 <div id="clube-selecionado">
-	@if(isset($clube))
-		 <li data-id="<%= clube.id %>" class="list-group-item smooth-color">
-		 	{{ $clube->nome }}
-            <img class="pull-right" height="35" src='{{ URL::to("clubes/$clube->logo") }}' />
+	@if(Session::has('clube'))
+		 <li data-id="{{ Session::get('clube.id') }}" class="list-group-item smooth-color">
+		 	{{ Session::get('clube.nome') }}
+            <img class="pull-right" height="35" src="{{ URL::to('clubes/' . Session::get('clube.logo')) }}" />
             <div class="clearfix"></div>
         </li>
 	@endif
 </div>
 
+{{ $errors->first('clube_sistema_id', '<div>:message</div>') }}
 
-<ul class="list-group lista-jogadores"></ul>
-<ul id="form-attach-players" class="list-group"></ul>
-{{ Form::submit('Salvar', ['class' => 'btn btn-primary']) }}
+{{ Form::submit('Salvar', ['class' => 'btn wm-smooth-box']) }}
+
+
 
 {{ Form::close() }}
 
@@ -49,24 +68,6 @@
 </ul>
 </script>
 
-
-<script type="text/template" id="tpl-jogadores-listagem">
-    <ul id="select-players-ajax" class="list-group">
-        <% _.each(jogadores, function (jogador) { %>
-            <li data-id="<%= jogador.id %>" class="list-group-item smooth-color">
-                <%- jogador.nome %>
-                <img src="<%= jogador.foto %>" />
-            </li>
-        <% }); %>
-    </ul>
-</script>
-
-<script type="text/template" id="tpl-modal-jogadores">
-    <form>
-        <input type="text" id="autocomplete-jogadores" class='form-control' />
-    </form>
-    <div id="box-autocomplete-jogadores"></div>
-</script>
 @stop
 
 

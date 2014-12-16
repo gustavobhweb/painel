@@ -8,4 +8,10 @@ class Liga extends Eloquent {
 
     protected $fillable = ['nome', 'dataInicio', 'dataFim', 'info', 'logo'];
 
+
+    public function clube()
+    {
+    	return $this->belongsTo('Clube');
+    }
+
 }

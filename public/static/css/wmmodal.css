@@ -46,7 +46,7 @@ section.wm-modal-box header.wm-modal-header{
 
 section.wm-modal-box div.wm-modal-body{
     color:white;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     min-height: 70%;
     margin:10px;
 }

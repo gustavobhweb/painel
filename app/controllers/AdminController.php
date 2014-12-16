@@ -185,7 +185,7 @@ class AdminController extends BaseController
 
                     $ext = Input::file('foto')->getClientOriginalExtension();
 
-                    $filename = uniqid() . $ext;
+                    $filename = uniqid() . ".$ext";
 
                     $dir = public_path("jogadores/");
 

@@ -2,7 +2,8 @@ var delay = (function() {
 
 	var timeout = 0;
 
-	return function (ms, callback) {
+	return function (ms, callback) 
+	{
 		clearTimeout(timeout);
 		timeout = setTimeout(callback, ms);
 	}
@@ -28,7 +29,6 @@ $(function(){
 					return;
 				}
 
-
 				var html = _.template(tplTimes).call(null, {clubes: response});
 
 				$containerClubes.html(html);
@@ -38,59 +38,23 @@ $(function(){
 	});
 
 
-	var modal = new WmModal(null, {
-		title: 'Selecione os jogadores',
-		width: 700,
-		height: 350
-	});
+	$(document).on('click', '.clube-item', function ()
+	{
 
-	$(document).on('click', '.clube-item', function(){
 		var value = $(this).data('id');
 
 		$('#clube-id').val(value);
 
 		$('#clube-selecionado').html(
-			$(this).clone()
+			$(this)
+				.clone()
 				.removeClass('clube-item')
 				.hide()
-				.show(500, function(){
-					modal
-						.setContentFromTemplate('#tpl-modal-jogadores')
-						.open();	
-				})
+				.show(500)
 		);
+
+		$("#container-clubes").empty();
 		
-	});
-
-
-	/**
-	*
-	*/
-
-	var tplJogadoresLista = $("#tpl-jogadores-listagem").html();
-
-
-	$(document).on('keyup', '#autocomplete-jogadores', function(){
-
-		var formData = {
-			nome:$(this).val().trim(),
-			liga_id: $('[name=liga_id]').val()
-		};
-
-		delay (500, function () {
-
-			$.ajax({
-				url: '/user/ajax-listar-jogadores',
-				data: formData,
-				type: "GET",
-				success: function (response) {
-
-					var html = _.template(tplJogadoresLista).call(null, {jogadores: response});
-					$("#box-autocomplete-jogadores").html(html);
-				}
-			});
-
-		});
 	});
 
 });
