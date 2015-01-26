@@ -1,0 +1,103 @@
+#container-jogadores {
+	position: relative;
+}
+
+
+#ajax-jogadores
+{
+	position: absolute;
+	width: 100%;
+	z-index:5;
+	cursor: pointer;
+}
+
+table.list-play-data th, table.list-play-data td{
+	padding: 5px;
+}
+
+.jogador-img-ajax{
+	height: 100px;
+	width: 100px;
+	float: right;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-bottom:15px solid rgba(255, 255, 255, 0.4);
+}
+
+.preview-selected-player{
+	height: 100px;
+	width: 100px;
+	background-position: center;
+	background-size: cover;
+	position: relative;
+	background-repeat: no-repeat;
+	float: left;
+	-webkit-transition: 1s linear;
+	transition: 1s linear;
+}
+
+.preview-selected-player:after{	
+	left:0;
+	top:0;
+	position: absolute;
+	display: block;
+	background:transparent;
+	padding:10px;
+	border-radius:10px;
+	text-align:center;
+
+}
+
+.preview-selected-player:hover:after{
+	content: attr(data-title);
+	background:rgba(0, 0, 0, 0.9);
+	color:white;
+	font-size: 20px;
+	width: 200px;
+	top: -30px;
+	left: 30px;
+}
+
+#jogadores-listagem .player{
+	background-color:rgba(0,0,0,0.8);
+	color:whitesmoke;
+	border-radius:0;
+	width: 50%;
+	box-sizing: border-box;
+	float:left;
+	box-sizing: border-box;
+	height:150px;
+
+}
+
+#jogadores-listagem .player .jogador-img-ajax{
+	width:50px;
+	height:80px;
+}
+
+
+#jogadores-listagem:after{
+	clear: both;
+	content:'';
+	display: block;
+}
+
+.player{
+	background-color: #D9E2E8;
+	display:block;
+	border:thin solid #6C6C6C;
+	padding:10px;
+	color:#141414;
+}
+
+.player:first-of-type{
+	border-radius:10px 10px 0 0;
+}
+.player:last-of-type{
+	border-radius:0 0 10px 10px;
+}
+
+.remove-player{
+
+}

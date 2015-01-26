@@ -19,9 +19,9 @@
     {{ $errors->first('abreviatura') }}
     </div>
     <div class="inputs-container medium">
-    {{ Form::label('nacao_sistema_id', 'Nação Sistema') }}
-    {{ Form::select('nacao_sistema_id', ['' => '(Selecione um país)'] + $nacoes, Input::old('nacao_sistema_id'), ['class' => 'txt-default']) }}
-    {{ $errors->first('nacao_sistema_id')  }}
+    {{ Form::label('nacao_id', 'Nação Sistema') }}
+    {{ Form::select('nacao_id', ['' => '(Selecione um país)'] + $nacoes, Input::old('nacao_id'), ['class' => 'txt-default']) }}
+    {{ $errors->first('nacao_id')  }}
     </div>
 
     <div class="inputs-container text-right">

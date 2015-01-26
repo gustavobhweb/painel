@@ -14,19 +14,19 @@
 
 {{ 
     Form::select(
-        'nacao_sistema_id',
+        'nacao_id',
         $paises,
-        Input::old('nacao_sistema_id'),
+        Input::old('nacao_id'),
         ['class' => 'form-control select-paises']
     )
 }}
 
-{{ $errors->first('nacao_sistema_id', '<div>:messages</div>') }}
+{{ $errors->first('nacao_id', '<div>:messages</div>') }}
 
 {{ 
     Form::hidden(
-        'clube_sistema_id',
-        Input::old('clube_sistema_id'),
+        'clube_id',
+        Input::old('clube_id'),
         ['id' => 'clube-id']
     ) 
 }}
@@ -40,7 +40,7 @@
 	@endif
 </div>
 
-{{ $errors->first('clube_sistema_id', '<div>:message</div>') }}
+{{ $errors->first('clube_id', '<div>:message</div>') }}
 
 {{ Form::submit('Salvar', ['class' => 'btn wm-smooth-box']) }}
 

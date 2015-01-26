@@ -32,7 +32,9 @@
             </div><!-- .mercado -->
             <div class='menu'>
                 <ul>
-                    <li><a href='#'>Classificação</a></li>
+                    <li>
+                        <a href="{{ URL::to('user/classificacao') }}">Classificação</a>
+                    </li>
                     <li><a href='#'>Artilharia</a></li>
                     <li><a href='#'>Estatística</a></li>
                     <li><a href='#'>Noticiário</a></li>

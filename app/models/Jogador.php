@@ -3,11 +3,15 @@
 class Jogador extends Eloquent 
 {
 
-    protected $table = 'jogadores_sistema';
+    protected $table = 'jogadores';
 
     protected $fillable = [
-    	'nome', 'apelido', 'dataNasc',
-    	'nacao_sistema_id', 'foto', 'clube_sistema_id', 'posicao_id'
+    	'nome',
+        'apelido',
+        'data_nascimento',
+    	'nacao_id',
+        'foto',
+        'posicao_id'
     ];
 
     public $timestamps = false;

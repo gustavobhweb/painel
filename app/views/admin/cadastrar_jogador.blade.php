@@ -20,33 +20,35 @@
 
 
     <div class="inputs-container medium">
-    {{ Form::label('dataNasc', 'Data de Nascimento') }}
-    {{ Form::text('dataNasc', Input::old('dataNasc'), ['class' => 'txt-default']) }}
-    {{ $errors->first('dataNasc') }}
+    {{ Form::label('data_nascimento', 'Data de Nascimento') }}
+    {{ Form::text('data_nascimento', Input::old('data_nascimento'), ['class' => 'txt-default', 'id' => 'data-nascimento']) }}
+    {{ $errors->first('data_nascimento') }}
     </div>
 
+    <div class='clearfix'></div>
+    
     <div class="inputs-container medium">
-    {{ Form::label('clube_sistema_id', 'Clube') }}
+    {{ Form::label('clube_id', 'Clube') }}
     {{ 
     	Form::select(
-    		'clube_sistema_id',
-    		['' => '(Selecione um clubes)'] + $clubes, Input::old('clube_sistema_id'),
+    		'clube_id',
+    		['' => '(Selecione um clubes)'] + $clubes, Input::old('clube_id'),
     		['class' => 'txt-default']
     	) 
     }}
-    {{ $errors->first('clube_sistema_id')  }}
+    {{ $errors->first('clube_id')  }}
     </div>
 
     <div class="inputs-container medium">
-    {{ Form::label('nacao_sistema_id', 'Naturalidade') }}
+    {{ Form::label('nacao_id', 'Naturalidade') }}
     {{ 
     	Form::select(
-    		'nacao_sistema_id',
-    		['' => '(Selecione um país)'] + $nacoes, Input::old('nacao_sistema_id'),
+    		'nacao_id',
+    		['' => '(Selecione um país)'] + $nacoes, Input::old('nacao_id'),
     		['class' => 'txt-default']
     	) 
     }}
-    {{ $errors->first('nacao_sistema_id')  }}
+    {{ $errors->first('nacao_id')  }}
     </div>
 
 
@@ -93,5 +95,14 @@
 
 
 @section('scripts')
-{{ HTML::script('static/js/admin/cadastrar_jogador.js') }}
+{{ 
+    HTML::script('static/js/admin/cadastrar_jogador.js'),
+    HTML::script('static/js/jquery-ui.js'),
+    HTML::script('static/js/jquery-ui-pt-br.js')
+}}
 @stop	
+
+@section('styles')
+{{ HTML::style('static/css/jquery-ui.min.css') }}
+@stop
+

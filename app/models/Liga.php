@@ -6,12 +6,12 @@ class Liga extends Eloquent {
 
     public $timestamps = false;
 
-    protected $fillable = ['nome', 'dataInicio', 'dataFim', 'info', 'logo'];
+    protected $fillable = ['nome', 'data_inicio', 'data_fim', 'info', 'logo'];
 
 
-    public function clube()
+    public function pontuacoes()
     {
-    	return $this->belongsTo('Clube');
+    	return $this->hasMany('Pontuacao', 'liga_id');
     }
 
 }

@@ -5,13 +5,13 @@ class LigaUsuarioClube extends Eloquent
 
     protected $table = 'liga_usuario_clube';
 
-    protected $fillable = ['usuario_id', 'liga_id', 'clube_sistema_id'];
+    protected $fillable = ['usuario_id', 'liga_id', 'clube_id'];
 
 
     protected static $validations = [
     	'usuario_id' => 'required|exists:usuarios,id',
     	'liga_id'	 => 'required|exists:ligas,id',
-    	'clube_sistema_id'	=> 'required|exists:clubes_sistema,id'
+    	'clube_id'	=> 'required|exists:clubes,id'
    	];
 
    	protected static $messages = [
@@ -45,7 +45,12 @@ class LigaUsuarioClube extends Eloquent
 
     public function clube()
     {
-        return $this->belongsTo('Clube', 'clube_sistema_id');
+        return $this->belongsTo('Clube', 'clube_id');
+    }
+
+    public function liga()
+    {
+        return $this->belongsTo('Liga', 'liga_id');
     }
 
 

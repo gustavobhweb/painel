@@ -130,11 +130,11 @@ class AdminController extends BaseController
             $rules = [
                 'nome'              => 'required',
                 'abreviatura'       => 'required|max:3',
-                'nacao_sistema_id'  => 'required|exists:nacoes_sistema,id'
+                'nacao_id'  => 'required|exists:nacoes_sistema,id'
             ];
 
-
-            $inputs = Input::only('nome', 'abreviatura', 'nacao_sistema_id');
+                
+            $inputs = Input::only('nome', 'abreviatura', 'nacao_id');
 
             $validation = Validator::make($inputs, $rules, $this->messages);
 
@@ -155,7 +155,7 @@ class AdminController extends BaseController
             }
         }
 
-        $nacoes = Nacao::select('id', 'nome')->lists('nome', 'id');
+        $nacoes = Nacao::lists('nome', 'id');
 
         return View::make('admin.cadastrar_clube', compact('nacoes'));
     }
@@ -166,13 +166,13 @@ class AdminController extends BaseController
         if (Request::isMethod('post')) {
 
             $rules = [
-                'apelido'           => 'required|min:3',
-                'clube_sistema_id'  => 'required|exists:clubes_sistema,id',
-                'dataNasc'          => 'required|regex:/\d{2}\/\d{2}\/\d{4}/',
-                'nacao_sistema_id'  => 'required|exists:nacoes_sistema,id',
-                'posicao_id'        => 'required|exists:posicoes,id',
-                'nome'              => 'required',
-                'foto'              => 'required'
+                'apelido'         => 'required|min:3',
+                'clube_id'        => 'required|exists:clubes,id',
+                'data_nascimento' => 'required|regex:/\d{2}\/\d{2}\/\d{4}/',
+                'nacao_id'        => 'required|exists:nacoes,id',
+                'posicao_id'      => 'required|exists:posicoes,id',
+                'nome'            => 'required',
+                'foto'            => 'required'
             ]; 
 
             $inputs = Input::except('_token');

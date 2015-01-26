@@ -2,8 +2,8 @@
 
 class Clube extends Eloquent {
 
-    protected $table = 'clubes_sistema';
+    protected $table = 'clubes';
 
-    protected $fillable = ['nome', 'nacao_sistema_id', 'abreviatura'];
+    protected $fillable = ['nome', 'nacao_id', 'abreviatura'];
 
 }

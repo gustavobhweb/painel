@@ -233,7 +233,10 @@ class UserController extends Controller {
     {   
         $auth = Auth::user();
 
-        $ligaUsuario = LigaUsuarioClube::whereUsuarioId($auth->id)->whereLigaId($liga_id);
+        $liga = Liga::findOrFail($liga_id);
+
+        $ligaUsuario = LigaUsuarioClube::whereUsuarioId($auth->id)
+                                        ->whereLigaId($liga_id);
 
         if ($ligaUsuario->count()) {
 
@@ -249,11 +252,10 @@ class UserController extends Controller {
             }
         }
 
-
-
-        $liga = Liga::find($liga_id);
-
-        $paises = Nacao::orderBy('nome')->lists('nome', 'id');
+    
+        $paises = Nacao::has('clubes')
+                            ->orderBy('nome')
+                        ->lists('nome', 'id');
 
         if (Request::isMethod('post')) {
 
@@ -261,14 +263,14 @@ class UserController extends Controller {
 
             try {
 
-                if (Input::has('clube_sistema_id')) {
-                    $clube = Clube::find(Input::get('clube_sistema_id'))->toArray();
+                if (Input::has('clube_id')) {
+                    $clube = Clube::find(Input::get('clube_id'))->toArray();
                 }
 
                 $data = [
-                    'liga_id'          => $liga_id,
-                    'usuario_id'       => $auth->id,
-                    'clube_sistema_id' => Input::get('clube_sistema_id')
+                    'liga_id'    => $liga_id,
+                    'usuario_id' => $auth->id,
+                    'clube_id'   => Input::get('clube_id')
                 ];
 
                 $validator = LigaUsuarioClube::validateInputs($data);
@@ -277,6 +279,8 @@ class UserController extends Controller {
                 if ($validator->passes()) {
 
                     LigaUsuarioClube::create($data);
+
+                     return Redirect::to("user/selecionar-jogadores-liga/{$ligaUsuario->liga_id}");
 
                 } else {
 
@@ -316,7 +320,7 @@ class UserController extends Controller {
         }
 
         $nacao_id = filter_var(Input::get('nacao_id'));
-        $clubes = Clube::where('nacao_sistema_id', '=', $nacao_id)->get();
+        $clubes = Clube::where('nacao_id', '=', $nacao_id)->get();
 
         return Response::json($clubes);
     }
@@ -336,7 +340,7 @@ class UserController extends Controller {
         }
 
         $jogadores = LigaJogador::jogadoresDisponiveis($liga_id)
-                            ->where('nome', 'LIKE', "%$nome%")
+                            ->where('nome', 'REGEXP', "[[:<:]]{$nome}")
                             ->with('posicao')
                             ->get();
 
@@ -369,6 +373,7 @@ class UserController extends Controller {
         $ligaJogador = LigaJogador::whereLigaId($liga_id);
 
         if ($ligaJogador->count() < 23) {
+            
             return Redirect::back()->withFail(true);
         }
 
@@ -389,15 +394,18 @@ class UserController extends Controller {
         $ligaJogador = LigaJogador::whereLigaId($liga_id);
 
         if ($ligaJogador->count() >= 23) {
+
             return Response::json([
                 'error' => 'Você já possui a escalação completa para essa liga'
             ]);
         }
 
         if ($ligaJogador->whereJogadorId($jogador_id)->count()) {
+
             return Response::json([
                 'error' => 'Esse jogador já foi cadastrado'
             ]);   
+
         }
 
 
@@ -417,7 +425,7 @@ class UserController extends Controller {
 
         } else {
 
-            return Response::json(['error' => $validator->messages()]);
+            return Response::json(['error' => $validator->messages()->toArray()]);
             
         }
     }
@@ -447,5 +455,55 @@ class UserController extends Controller {
 
             return Response::json(['error' => 'Erro ao processar o pedido']);
         }
+    }
+
+
+    public function getClassificacao()
+    {
+        $ligas = Liga::all();
+
+        return View::make('user.classificacao', get_defined_vars());
+    }
+    
+
+    public function getVerJogos($id)
+    {
+
+        $liga = Liga::findOrFail($id);
+
+        $auth = Auth::user();
+
+        $pontuacao = Pontuacao::whereLigaId($id)
+                               ->whereUsuarioId($auth->id);
+
+        $pontuacaoTotal = $pontuacao->sum('pontos');
+
+        $pontuacao = $pontuacao->get();
+
+        return View::make('user.ver_jogos', get_defined_vars());
+    }
+
+
+    public function getPontuacao($id)
+    {
+
+        $select = [
+            'jogo_id',
+            'clube_id',
+            'usuario_id',
+            DB::raw('SUM(pontos) as total_pontos')
+        ];
+
+
+        $liga = Liga::find($id);
+
+        $pontuacao  = $liga->pontuacoes()
+                                ->select($select)
+                                ->groupBy('usuario_id')
+                                ->orderBy('total_pontos', 'DESC')
+                                ->get();
+
+
+        return View::make('user.pontuacao', get_defined_vars());
     }
 }
