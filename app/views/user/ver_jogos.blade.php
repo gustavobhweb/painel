@@ -1,6 +1,5 @@
 @extends('layouts.defaultAuth')
-
-
+{{ error_reporting(0) }}
 @section('content')
 
 <div class="wm-smooth-box">
@@ -35,7 +34,7 @@
 
 	 		<br>
 	 		<div class="text-right">
-	 		Data do Jogo: {{ (new DateTime($ponto->jogo->updated_at))->format('d/m/Y H:i') }}
+	 		Data do Jogo: {{ $ponto->jogo->updated_at->format('d/m/Y H:i') }}
 	 		</div>
 
 	 		

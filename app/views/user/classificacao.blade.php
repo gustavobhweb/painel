@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="col-xs-7 wm-smooth-box">
+<div class="col-xs-8 wm-smooth-box">
     <h3>Ligas</h3>
     <ul class="list-group">
     @foreach($ligas as $liga)
@@ -16,6 +16,12 @@
             |
             <a href="{{ URL::action('UserController@getPontuacao', [$liga->id]) }}">
                 Pontuação
+            </a>
+
+            |
+
+            <a href="{{ URL::to('user/informar-resultado') }}">
+                Informar resultado
             </a>
         </li>
     @endforeach

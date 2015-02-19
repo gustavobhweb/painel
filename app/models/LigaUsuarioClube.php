@@ -53,5 +53,10 @@ class LigaUsuarioClube extends Eloquent
         return $this->belongsTo('Liga', 'liga_id');
     }
 
+    public function usuario()
+    {
+        return $this->belongsTo('User', 'usuario_id');
+    }
+
 
 }

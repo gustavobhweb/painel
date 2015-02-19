@@ -6,4 +6,6 @@ class Clube extends Eloquent {
 
     protected $fillable = ['nome', 'nacao_id', 'abreviatura'];
 
+    
+
 }

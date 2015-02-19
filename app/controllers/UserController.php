@@ -506,4 +506,76 @@ class UserController extends Controller {
 
         return View::make('user.pontuacao', get_defined_vars());
     }
+
+
+    public function anyInformarResultado()
+    {
+
+        $ligas = Auth::user()->ligas()->lists('nome', 'id');
+
+        if (Request::isMethod('post')) {
+
+            $rules = [
+                'liga_id'       => 'required|exists:ligas,id',
+                'adversario_id' => 'required|exists:usuarios,id',
+            ];
+
+            $messages = [
+                'required' => 'Esse campo é obrigatório'    
+            ];
+
+            $validation = Validator::make(Input::all(), $rules, $messages);
+
+            $auth = Auth::user();
+ 
+            if ($validation->passes()) {
+
+                $data = Input::only('liga_id', 'gols_casa', 'gols_fora');
+
+                if (Input::get('local_jogo') == 'fora') {
+
+                    $data['usuario_id_fora'] = $auth->id;
+                    $data['usuario_id_casa'] = Input::get('adversario_id');
+
+                } else {
+
+                    $data['usuario_id_casa'] = $auth->id;
+                    $data['usuario_id_fora'] = Input::get('adversario_id');
+                }
+
+                Jogo::create($data);
+                
+
+            } else {
+
+                return Redirect::back()->withInput()->withErrors($validation);
+            }
+
+        }
+
+        return View::make('user.informar-resultado', get_defined_vars());
+    }
+
+    
+    public function getAjaxUsuarioJogadoresLiga($id)
+    {
+
+        $search = Input::get('nome');
+
+        $auth = Auth::user();
+
+        $with['usuario'] = function ($query) use($search, $auth) {
+            $query->where('nome', 'REGEXP', $search)->where('id', '<>', $auth->id);
+        };
+
+        $clubes = LigaUsuarioClube::whereLigaId($id)
+                    ->whereHas('usuario', $with['usuario'])
+                    ->with($with)
+                    ->with('clube')
+                    ->get();
+
+
+
+        return Response::json($clubes);
+    }   
 }

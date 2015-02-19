@@ -5,7 +5,7 @@ class Jogo extends Eloquent
 
     protected $table = 'jogos';
 
-    protected $fillable = ['data_hora', 'gols_fora', 'gols_casa', 'usuario_id_fora'];
+    protected $fillable = ['liga_id', 'data_hora', 'gols_fora', 'gols_casa', 'usuario_id_fora', 'usuario_id_casa'];
 
 
     public function usuarioFora()

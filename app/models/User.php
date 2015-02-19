@@ -11,7 +11,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
     protected $table = 'usuarios';
     
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'remember_token'];
     
 
     public static function isValidEmail($email)
@@ -34,6 +34,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $user = Auth::user();
         $user->img_fullpath = $fullpath;
         $user->save();
+    }
+
+    public function ligas()
+    {
+        return $this->belongsToMany('Liga', 'liga_usuario_clube', 'usuario_id');
     }
 
 }
